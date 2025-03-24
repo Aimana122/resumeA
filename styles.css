@@ -1,0 +1,70 @@
+ body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Montserat, sans-serif;
+        }
+a {
+    all: unset; /* Сбрасывает все стили */
+    cursor: pointer; /* Возвращаем курсор-указатель */
+}
+ul, ol {
+    all: unset; /* Сбрасывает все стили */
+    list-style: none; /* Убирает маркеры списка */
+    padding: 0; /* Убирает отступы */
+    margin: 0; /* Убирает внешние отступы */
+}
+        /* Первая картинка (превью) */
+        .preview {
+            background-image: url('fon1.jpg'); /* Замените на своё изображение */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Фиксированный фон */
+            height: 100vh; /* На весь экран */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; /* Для корректного отображения */
+            overflow: hidden; /* Убирает обрезку */
+        }
+
+        /* Вторая картинка */
+        .full-screen-image {
+            background-image: url('fon2.jpg'); /* Замените на своё изображение */
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* На весь экран */
+            position: relative; /* Для позиционирования текста */
+        }
+
+		.text-overlay li{
+			color:white;
+			font-size:30px;
+		}
+        /* Текст на второй картинке */
+        .text-overlay {
+            position: absolute;
+            top: 70px; /* Отступ сверху */
+            left: 90px; /* Отступ слева */
+        }
+        .text-overlay h2 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .text-overlay ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #555;
+        }
+        .text-overlay ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .text-overlay {
+                max-width: 90%; /* Текст занимает больше места на мобильных */
+                left: 10px;
+                top: 10px;
+            }
