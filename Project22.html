@@ -2,656 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cookie Visualizer – Full Experience</title>
+  <title>Cookie Visualizer</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
       margin: 0;
-      padding: 0;
-      background: #f0f8ff;
-      color: #333;
-    }
-    header {
-      background: #1e90ff;
-      color: white;
       padding: 20px;
-      text-align: center;
     }
     nav {
-      display: flex;
-      justify-content: center;
-      background: #e6f2ff;
-      gap: 10px;
-      padding: 10px 0;
+      margin-bottom: 20px;
     }
-    nav button {
-      background: #87cefa;
-      border: none;
-      border-radius: 8px;
+    .tab-btn {
       padding: 10px 20px;
-      color: white;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-    nav button:hover {
-      background: #00aaff;
-      transform: translateY(-1px);
-    }
-    nav button.active {
-      background: #1e90ff;
-    }
-    section {
-      display: none;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    section.active {
-      display: block;
-    }
-    .cookie-card {
-      background: #fff;
-      border-left: 6px solid #1e90ff;
-      border-radius: 10px;
-      margin: 10px 0;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      position: relative;
-    }
-    .cookie-card h3 {
-      margin: 0 0 5px 0;
-      font-size: 18px;
-      color: #1e90ff;
-    }
-    .cookie-card p {
-      margin: 4px 0;
-      font-size: 14px;
-      color: #555;
-    }
-    .cookie-card .badge {
-      display: inline-block;
-      background: #87cefa;
-      color: white;
-      padding: 2px 8px;
-      font-size: 12px;
-      border-radius: 4px;
-      margin-right: 5px;
-    }
-    .cookie-card .delete-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff4d4d;
-      border: none;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    .example-result {
-      background: #ffffff;
-      border-left: 4px solid #1e90ff;
-      padding: 10px;
-      margin: 10px 0;
-    }
-    .cookie-form {
-      margin-top: 20px;
-      padding: 10px;
-      background: #e6f2ff;
-      border-radius: 8px;
-    }
-    .cookie-form input {
       margin-right: 10px;
-      padding: 8px;
-    }
-    .cookie-form button {
-      padding: 8px 12px;
-      background: #1e90ff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .cookie-actions {
-      margin-bottom: 15px;
-      display: flex;
-      gap: 10px;
-    }
-    .cookie-actions button {
-      background: #00aaff;
-      padding: 10px 15px;
-      color: white;
-      font-weight: bold;
+      background-color: #e0f0ff;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: bold;
     }
-    .cookie-actions button:hover {
-      background: #0088cc;
+    .tab-btn.active {
+      background-color: #1e90ff;
+      color: white;
+    }
+    section {
+      display: none;
+    }
+    .cookie-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .site-btn {
+      padding: 10px 15px;
+      background: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 5px;
     }
   </style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    border: none;
-    background: #e0f0ff;
-    color: #333;
-    margin-right: 5px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .tab-btn.active {
-    background: #1e90ff;
-    color: white;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-
-<style>
-  .site-btn {
-    padding: 10px 15px;
-    background: #1e90ff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: background 0.3s;
-  }
-  .site-btn:hover {
-    background: #559dff;
-  }
-  .category-select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .highlighted-category {
-    background-color: #104e8b;
-    color: #ffffff;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    border: none;
-    background: #e0f0ff;
-    color: #333;
-    margin-right: 5px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .tab-btn.active {
-    background: #1e90ff;
-    color: white;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-
-
 </head>
 <body>
+  <h1>🍪 Cookie Visualizer</h1>
 
-  <header>
-    <h1>🍪 Cookie Visualizer</h1>
-    <p>Understand, explore, and simulate browser cookies</p>
-  </header>
+  <nav>
+    <button class="tab-btn" onclick="showTab('myCookies', this)">My Cookies</button>
+    <button class="tab-btn" onclick="showTab('aboutCookies', this)">About Cookies</button>
+    <button class="tab-btn" onclick="showTab('siteExamples', this)">Site Examples</button>
+  </nav>
 
-  
-
-<nav>
-  <button class="tab-btn" onclick="showTab('myCookies', this)">My Cookies</button>
-  <button class="tab-btn" onclick="showTab('aboutCookies', this)">About Cookies</button>
-  <button class="tab-btn" onclick="showTab('siteExamples', this)">Site Examples</button>
-</nav>
-
-
-
-  <section id='myCookies' style='display: block' class="active">
-    <h2>Your Browser Cookies</h2>
-    <div class="cookie-actions">
-      <button onclick="addTypedCookies()">➕ Add Demo Cookies (Types)</button>
-      <button onclick="clearAllCookies()">🧹 Clear All Cookies</button>
-      <button onclick="displayCookies()">🔄 Refresh</button>
+  <section id="myCookies">
+    <h2>My Cookies</h2>
+    <button onclick="addTypedCookies()">Add Demo Cookies</button>
+    <button onclick="clearAllCookies()">Clear All Cookies</button>
+    <button onclick="displayCookies()">Load My Cookies</button>
+    <div style="margin-top: 20px;">
+      <input id="customCookieName" placeholder="Name" />
+      <input id="customCookieValue" placeholder="Value" />
+      <button onclick="addCustomCookie()">Add Custom Cookie</button>
     </div>
-
-    <div class="cookie-form">
-      <h4>🔧 Add Your Own Cookie</h4>
-      <input type="text" id="cookieName" placeholder="Name" />
-      <input type="text" id="cookieValue" placeholder="Value" />
-      <button onclick="addCustomCookie()">Add Cookie</button>
-    </div>
-
-    <div id="cookieContainer"></div>
+    <div id="cookieContainer" style="margin-top: 20px;"></div>
   </section>
 
-  <section id='aboutCookies' style='display: none'>
-<h2>What Are Cookies?</h2>
-<p>
-  Cookies are small text files stored by your browser when you visit websites. They are used to remember you, your preferences, or your activity on the website. Cookies are essential for many modern web features such as logins, shopping carts, language preferences, and analytics.
-</p>
+  <section id="aboutCookies">
+    <h2>About Cookies</h2>
+    <p><strong>What are cookies?</strong> Cookies are small pieces of data stored by your browser. Websites use them to remember things like logins, preferences, or analytics.</p>
+    <ul>
+      <li><strong>Session Cookies</strong> – Deleted when you close your browser.</li>
+      <li><strong>Persistent Cookies</strong> – Stay on your computer until expiration date.</li>
+      <li><strong>First-party Cookies</strong> – Set by the site you’re visiting.</li>
+      <li><strong>Third-party Cookies</strong> – Set by a third party (like ads or analytics).</li>
+      <li><strong>Secure/HttpOnly Cookies</strong> – Limited in how they’re accessed for security.</li>
+    </ul>
+  </section>
 
-<h3>🍪 Types of Cookies:</h3>
-<ul>
-  <li><strong>Session Cookies:</strong> Exist temporarily and are deleted once the browser is closed. Used for things like keeping you logged in during a session.</li>
-  <li><strong>Persistent Cookies:</strong> Remain on your device for a set time, often used for remembering login data or preferences between sessions.</li>
-  <li><strong>Third-Party Cookies:</strong> Placed by domains other than the one you’re visiting (e.g., advertising and tracking cookies from external services).</li>
-  <li><strong>Secure Cookies:</strong> Can only be transmitted over HTTPS connections. Protect data during transmission.</li>
-  <li><strong>HttpOnly Cookies:</strong> Not accessible by JavaScript. Used to protect sensitive information such as session tokens.</li>
-</ul>
+  <section id="siteExamples">
+    <h2>Site Examples</h2>
+    <p>Click a site to view example cookies it uses:</p>
+    <div>
+      <button class="site-btn" onclick="showSiteInfo('Google')">Google</button>
+      <button class="site-btn" onclick="showSiteInfo('Facebook')">Facebook</button>
+      <button class="site-btn" onclick="showSiteInfo('YouTube')">YouTube</button>
+    </div>
+    <div id="siteInfoContainer" style="margin-top: 20px;"></div>
+  </section>
 
-<h3>🔍 What Cookies Can Do:</h3>
-<ul>
-  <li>Remember who you are (login sessions)</li>
-  <li>Track behavior across websites (ads, recommendations)</li>
-  <li>Store preferences (theme, language)</li>
-  <li>Enable e-commerce carts and checkout</li>
-</ul>
-
-<h3>⚠️ Privacy Notes:</h3>
-<p>
-  Cookies can be helpful, but they also raise privacy concerns when used to track users across multiple sites. Modern browsers allow you to block third-party cookies and manage cookie storage.
-</p>
-</section>
-
-  <section id='siteExamples' style='display: none'>
-<h2>Explore Cookies by Website</h2>
-
-<div class="site-buttons-container">
-<button class="site-btn" onclick="showSiteInfo('YouTube')">YouTube</button>
-<button class="site-btn" onclick="showSiteInfo('Facebook')">Facebook</button>
-<button class="site-btn" onclick="showSiteInfo('Instagram')">Instagram</button>
-<button class="site-btn" onclick="showSiteInfo('Twitter')">Twitter</button>
-<button class="site-btn" onclick="showSiteInfo('Reddit')">Reddit</button>
-<button class="site-btn" onclick="showSiteInfo('Amazon')">Amazon</button>
-<button class="site-btn" onclick="showSiteInfo('Google')">Google</button>
-<button class="site-btn" onclick="showSiteInfo('TikTok')">TikTok</button>
-</div>
-<div id="siteInfoContainer" class="site-info-box"></div>
-
-<style>
-  #siteExamples {
-    font-size: 15px;
-  }
-  #siteExamples select {
-    margin: 10px 0 20px 0;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-  .site-buttons-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .site-btn {
-    padding: 10px 15px;
-    background: #1e90ff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  .site-info-box {
-    display: none;
-    padding: 15px;
-    background: #f4faff;
-    border-left: 4px solid #87cefa;
-    border-radius: 6px;
-    margin-top: 15px;
-    line-height: 1.6;
-  }
-  .cookie-info {
-    margin-top: 10px;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    border: none;
-    background: #e0f0ff;
-    color: #333;
-    margin-right: 5px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .tab-btn.active {
-    background: #1e90ff;
-    color: white;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-
-<style>
-  .site-btn {
-    padding: 10px 15px;
-    background: #1e90ff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: background 0.3s;
-  }
-  .site-btn:hover {
-    background: #559dff;
-  }
-  .category-select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .highlighted-category {
-    background-color: #104e8b;
-    color: #ffffff;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    border: none;
-    background: #e0f0ff;
-    color: #333;
-    margin-right: 5px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .tab-btn.active {
-    background: #1e90ff;
-    color: white;
-  }
-</style>
-<style>
-  nav {
-    margin-bottom: 20px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    background-color: #e0f0ff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background-color: #1e90ff;
-    color: white;
-  }
-</style>
-
-
-
-</section>
-
-  
-<script>
-function showTab(tabId, button) {
-  const tabs = document.querySelectorAll('section');
-  tabs.forEach(tab => {
-    tab.style.display = (tab.id === tabId) ? 'block' : 'none';
-  });
-
-  const buttons = document.querySelectorAll('.tab-btn');
-  buttons.forEach(btn => btn.classList.remove('active'));
-  if (button) button.classList.add('active');
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const defaultTab = document.querySelector('.tab-btn');
-  if (defaultTab) {
-    showTab('myCookies', defaultTab);
-  }
-});
-</script>
-<script>const siteInfoData = {
-'YouTube': '              <div class="cookie-info">                <strong>YSC</strong><br/>                📌 <em>Tracks views of embedded videos</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Analytics              </div>                          <div class="cookie-info">                <strong>VISITOR_INFO1_LIVE</strong><br/>                📌 <em>Estimates bandwidth and user ID</em><br/>                ⏳ <strong>Expires:</strong> 6 months<br/>                🎯 <strong>Purpose:</strong> Preferences              </div>                          <div class="cookie-info">                <strong>PREF</strong><br/>                📌 <em>Stores language and other preferences</em><br/>                ⏳ <strong>Expires:</strong> 8 months<br/>                🎯 <strong>Purpose:</strong> Customization              </div>                          <div class="cookie-info">                <strong>SID</strong><br/>                📌 <em>Session ID for login</em><br/>                ⏳ <strong>Expires:</strong> 2 years<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>            ',
-'Facebook': '              <div class="cookie-info">                <strong>c_user</strong><br/>                📌 <em>User ID of the current user</em><br/>                ⏳ <strong>Expires:</strong> 3 months<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>xs</strong><br/>                📌 <em>Session ID and encryption key</em><br/>                ⏳ <strong>Expires:</strong> 3 months<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>fr</strong><br/>                📌 <em>Browser and login ID</em><br/>                ⏳ <strong>Expires:</strong> 3 months<br/>                🎯 <strong>Purpose:</strong> Advertising              </div>                          <div class="cookie-info">                <strong>datr</strong><br/>                📌 <em>Security and browser identification</em><br/>                ⏳ <strong>Expires:</strong> 2 years<br/>                🎯 <strong>Purpose:</strong> Security              </div>            ',
-'Instagram': '              <div class="cookie-info">                <strong>ds_user_id</strong><br/>                📌 <em>Identifies the logged-in user</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>sessionid</strong><br/>                📌 <em>Session for logged-in user</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>csrftoken</strong><br/>                📌 <em>Protects against CSRF attacks</em><br/>                ⏳ <strong>Expires:</strong> 1 year<br/>                🎯 <strong>Purpose:</strong> Security              </div>            ',
-'Twitter': '              <div class="cookie-info">                <strong>guest_id</strong><br/>                📌 <em>Anonymous user ID</em><br/>                ⏳ <strong>Expires:</strong> 2 years<br/>                🎯 <strong>Purpose:</strong> Tracking              </div>                          <div class="cookie-info">                <strong>auth_token</strong><br/>                📌 <em>Authentication token</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>ct0</strong><br/>                📌 <em>CSRF token</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Security              </div>            ',
-'Reddit': '              <div class="cookie-info">                <strong>reddit_session</strong><br/>                📌 <em>Tracks current user session</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Session management              </div>                          <div class="cookie-info">                <strong>token</strong><br/>                📌 <em>Authorization token for APIs</em><br/>                ⏳ <strong>Expires:</strong> 1 hour<br/>                🎯 <strong>Purpose:</strong> API access              </div>                          <div class="cookie-info">                <strong>loid</strong><br/>                📌 <em>Anonymous login ID</em><br/>                ⏳ <strong>Expires:</strong> 90 days<br/>                🎯 <strong>Purpose:</strong> User tracking              </div>            ',
-'Amazon': '              <div class="cookie-info">                <strong>session-id</strong><br/>                📌 <em>Tracks user session</em><br/>                ⏳ <strong>Expires:</strong> 20 years<br/>                🎯 <strong>Purpose:</strong> Session tracking              </div>                          <div class="cookie-info">                <strong>ubid-main</strong><br/>                📌 <em>Unique user ID</em><br/>                ⏳ <strong>Expires:</strong> 20 years<br/>                🎯 <strong>Purpose:</strong> User identification              </div>                          <div class="cookie-info">                <strong>x-main</strong><br/>                📌 <em>Login state and preferences</em><br/>                ⏳ <strong>Expires:</strong> 20 years<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>            ',
-'Google': '              <div class="cookie-info">                <strong>SID</strong><br/>                📌 <em>Signed-in user ID</em><br/>                ⏳ <strong>Expires:</strong> 2 years<br/>                🎯 <strong>Purpose:</strong> Authentication              </div>                          <div class="cookie-info">                <strong>HSID</strong><br/>                📌 <em>Security cookie to prevent abuse</em><br/>                ⏳ <strong>Expires:</strong> 2 years<br/>                🎯 <strong>Purpose:</strong> Security              </div>                          <div class="cookie-info">                <strong>NID</strong><br/>                📌 <em>Stores preferences and ads settings</em><br/>                ⏳ <strong>Expires:</strong> 6 months<br/>                🎯 <strong>Purpose:</strong> Personalization              </div>                          <div class="cookie-info">                <strong>1P_JAR</strong><br/>                📌 <em>Tracks ad conversions</em><br/>                ⏳ <strong>Expires:</strong> 1 month<br/>                🎯 <strong>Purpose:</strong> Advertising              </div>            ',
-'TikTok': '              <div class="cookie-info">                <strong>tt_webid</strong><br/>                📌 <em>Unique user ID</em><br/>                ⏳ <strong>Expires:</strong> 1 year<br/>                🎯 <strong>Purpose:</strong> Tracking              </div>                          <div class="cookie-info">                <strong>tt_csrf_token</strong><br/>                📌 <em>CSRF protection token</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Security              </div>                          <div class="cookie-info">                <strong>passport_csrf_token</strong><br/>                📌 <em>CSRF token for login</em><br/>                ⏳ <strong>Expires:</strong> Session<br/>                🎯 <strong>Purpose:</strong> Security              </div>            '
-};
-
-function showSiteInfo(site) {
-  const container = document.getElementById("siteInfoContainer");
-  container.innerHTML = `<h3>${site}</h3>` + (siteInfoData[site] || "<p>No data available.</p>");
-  container.style.display = "block";
-}
-function showSiteInfo(site) {
-  const container = document.getElementById("siteInfoContainer");
-  container.innerHTML = `<h3>${site}</h3>` + (siteInfoData[site] || "<p>No data available.</p>");
-  container.style.display = "block";
-}
-</script>
-
-<script>
-function displayCookies() {
-  const cookies = document.cookie.split(";").map(c => {
-    const [name, ...rest] = c.trim().split("=");
-    return { name, value: rest.join("=") };
-  });
-  const container = document.getElementById("cookieContainer");
-  container.innerHTML = "";
-  const countDiv = document.createElement("div");
-  countDiv.style.fontWeight = "bold";
-  countDiv.style.marginBottom = "10px";
-  countDiv.innerText = `🍪 Total Cookies: ${cookies.length}`;
-  container.appendChild(countDiv);
-
-  cookies.forEach(cookie => {
-    const card = document.createElement("div");
-    card.className = "cookie-card";
-    card.innerHTML = `
-      <h3>${cookie.name}</h3>
-      <p><strong>Value:</strong> ${cookie.value}</p>
-    `;
-    container.appendChild(card);
-  });
-}
-
-);
-
-  // Подсветка активного фильтра
-  const options = document.querySelectorAll("#categorySelect option");
-  options.forEach(option => {
-    if (option.value === selected) {
-      option.setAttribute("selected", "selected");
-    } else {
-      option.removeAttribute("selected");
+  <script>
+    function showTab(tabId, button) {
+      const tabs = document.querySelectorAll('section');
+      tabs.forEach(tab => {
+        tab.style.display = (tab.id === tabId) ? 'block' : 'none';
+      });
+      const btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(btn => btn.classList.remove('active'));
+      if (button) button.classList.add('active');
     }
-  });
-}
- else {
-      btn.style.display = "none";
-    }
-  });
-}
-);
-}
 
-function showTab(tabId) {
-  const tabs = document.querySelectorAll('section');
-  tabs.forEach(tab => {
-    tab.style.display = (tab.id === tabId) ? 'block' : 'none';
-  });
-}
-window.onload = function() {
-  showTab('myCookies'); // Показываем первую вкладку при загрузке
-};
-</script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const defaultTab = document.querySelector('.tab-btn');
+      if (defaultTab) showTab('myCookies', defaultTab);
+    });
+
+    const siteInfoData = {
+      "Google": `
+        <ul>
+          <li><strong>SID:</strong> Session ID for login (2 years)</li>
+          <li><strong>NID:</strong> Preferences for Google services (6 months)</li>
+        </ul>`,
+      "Facebook": `
+        <ul>
+          <li><strong>fr:</strong> Facebook identity and ad tracking (90 days)</li>
+          <li><strong>xs:</strong> Login session ID (session)</li>
+        </ul>`,
+      "YouTube": `
+        <ul>
+          <li><strong>YSC:</strong> Session cookie for video interaction (session)</li>
+          <li><strong>VISITOR_INFO1_LIVE:</strong> Bandwidth tracking (6 months)</li>
+        </ul>`
+    };
+
+    function showSiteInfo(site) {
+      const container = document.getElementById("siteInfoContainer");
+      container.innerHTML = `<h3>${site}</h3>` + (siteInfoData[site] || "<p>No data available.</p>");
+      container.style.display = "block";
+    }
+
+    function displayCookies() {
+      const cookies = document.cookie.split(";").map(c => {
+        const [name, ...rest] = c.trim().split("=");
+        return { name, value: rest.join("=") };
+      });
+      const container = document.getElementById("cookieContainer");
+      container.innerHTML = "";
+      const countDiv = document.createElement("div");
+      countDiv.style.fontWeight = "bold";
+      countDiv.style.marginBottom = "10px";
+      countDiv.innerText = `🍪 Total Cookies: ${cookies.length}`;
+      container.appendChild(countDiv);
+      cookies.forEach(cookie => {
+        const card = document.createElement("div");
+        card.className = "cookie-card";
+        card.innerHTML = `
+          <h3>${cookie.name}</h3>
+          <p><strong>Value:</strong> ${cookie.value}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function clearAllCookies() {
+      const cookies = document.cookie.split(";");
+      cookies.forEach(cookie => {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+      });
+      displayCookies();
+    }
+
+    function addTypedCookies() {
+      document.cookie = "session_id=abc123; max-age=3600";
+      document.cookie = "theme=dark; max-age=86400";
+      document.cookie = "analytics_id=ga-999999; max-age=604800";
+      document.cookie = "preferences=lang:en,font:large; max-age=2592000";
+      displayCookies();
+    }
+
+    function addCustomCookie() {
+      const nameInput = document.getElementById("customCookieName");
+      const valueInput = document.getElementById("customCookieValue");
+      const name = nameInput.value.trim();
+      const value = valueInput.value.trim();
+      if (name && value) {
+        document.cookie = `${name}=${value}; max-age=86400`;
+        nameInput.value = "";
+        valueInput.value = "";
+        displayCookies();
+      }
+    }
+  </script>
 </body>
 </html>
