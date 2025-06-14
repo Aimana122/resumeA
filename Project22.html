@@ -111,30 +111,6 @@
       if (defaultTab) showTab('myCookies', defaultTab);
     });
 
-    const siteInfoData = {
-      "Google": `
-        <ul>
-          <li><strong>SID:</strong> Session ID for login (2 years)</li>
-          <li><strong>NID:</strong> Preferences for Google services (6 months)</li>
-        </ul>`,
-      "Facebook": `
-        <ul>
-          <li><strong>fr:</strong> Facebook identity and ad tracking (90 days)</li>
-          <li><strong>xs:</strong> Login session ID (session)</li>
-        </ul>`,
-      "YouTube": `
-        <ul>
-          <li><strong>YSC:</strong> Session cookie for video interaction (session)</li>
-          <li><strong>VISITOR_INFO1_LIVE:</strong> Bandwidth tracking (6 months)</li>
-        </ul>`
-    };
-
-    function showSiteInfo(site) {
-      const container = document.getElementById("siteInfoContainer");
-      container.innerHTML = `<h3>${site}</h3>` + (siteInfoData[site] || "<p>No data available.</p>");
-      container.style.display = "block";
-    }
-
     function displayCookies() {
       const cookies = document.cookie.split(";").map(c => {
         const [name, ...rest] = c.trim().split("=");
@@ -187,6 +163,30 @@
         valueInput.value = "";
         displayCookies();
       }
+    }
+
+    const siteInfoData = {
+      "Google": `
+        <ul>
+          <li><strong>SID:</strong> Session ID for login (2 years)</li>
+          <li><strong>NID:</strong> Preferences for Google services (6 months)</li>
+        </ul>`,
+      "Facebook": `
+        <ul>
+          <li><strong>fr:</strong> Facebook identity and ad tracking (90 days)</li>
+          <li><strong>xs:</strong> Login session ID (session)</li>
+        </ul>`,
+      "YouTube": `
+        <ul>
+          <li><strong>YSC:</strong> Session cookie for video interaction (session)</li>
+          <li><strong>VISITOR_INFO1_LIVE:</strong> Bandwidth tracking (6 months)</li>
+        </ul>`
+    };
+
+    function showSiteInfo(site) {
+      const container = document.getElementById("siteInfoContainer");
+      container.innerHTML = `<h3>${site}</h3>` + (siteInfoData[site] || "<p>No data available.</p>");
+      container.style.display = "block";
     }
   </script>
 </body>
