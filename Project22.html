@@ -155,6 +155,81 @@
     </div>
     <div id="cookieList"></div>
   </div>
+<nav>
+  <!-- Добавь кнопку вкладки -->
+  <button onclick="showTab('viewCookies')">🔍 View Cookies</button>
+</nav>
+
+<!-- Добавь секцию View Cookies -->
+<div id="viewCookies" class="tab">
+  <h2>🔍 How to View Cookies in Your Browser</h2>
+
+  <h3>🔍 Method 1: Using Browser Console (JavaScript)</h3>
+  <p><strong>✅ Steps:</strong></p>
+  <ol>
+    <li>Open the target website (e.g., <a href="https://google.com" target="_blank">https://google.com</a>)</li>
+    <li>Press <code>F12</code> or right-click → <strong>Inspect</strong></li>
+    <li>Go to the <strong>Console</strong> tab</li>
+    <li>Paste this code and press <strong>Enter</strong>:</li>
+  </ol>
+  <pre><code>document.cookie</code></pre>
+
+  <p>📋 <strong>What you’ll see:</strong></p>
+  <pre><code>NID=xyz123; SID=abc456; PREF=lang=en</code></pre>
+  <p>This string contains all cookies accessible from JavaScript on the current site.</p>
+
+  <h3>📁 Method 2: Using the "Application" Tab</h3>
+  <p><strong>✅ Steps:</strong></p>
+  <ol>
+    <li>Open DevTools (<code>F12</code>)</li>
+    <li>Go to the <strong>Application</strong> tab (in Firefox it's called <strong>Storage</strong>)</li>
+    <li>On the left, click <strong>Cookies</strong> and choose the site domain</li>
+    <li>You will see a table with details:</li>
+  </ol>
+
+  <table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 1em;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Expires</th>
+        <th>Secure</th>
+        <th>HttpOnly</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>session</td>
+        <td>abc123</td>
+        <td>2025-06-30</td>
+        <td>true</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>theme</td>
+        <td>dark</td>
+        <td>Session</td>
+        <td>false</td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>🧠 Hidden or Secure Cookies</h3>
+  <ul>
+    <li><strong>HttpOnly</strong> cookies cannot be seen in <code>document.cookie</code>, only in the <strong>Application</strong> tab</li>
+    <li><strong>Third-party</strong> cookies may be blocked by your browser</li>
+    <li><strong>Secure</strong> cookies are only available over HTTPS</li>
+  </ul>
+
+  <h3>💡 Bonus: Parse Cookies in JavaScript</h3>
+  <p>You can convert the cookie string into a table like this:</p>
+  <pre><code>const cookies = document.cookie.split("; ").map(c => {
+  const [name, value] = c.split("=");
+  return { name, value };
+});
+console.table(cookies);</code></pre>
+</div>
 
   <div id="aboutCookies" class="tab">
     <div>
