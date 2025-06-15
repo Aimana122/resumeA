@@ -65,13 +65,6 @@
       color: white;
     }
 
-    .cookie-card {
-      background: #3E2723;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      margin: 1em 0;
-      padding: 1.2em;
-    }
 
     .cookie-card button {
       margin-top: 0.5em;
@@ -86,6 +79,29 @@
     .cookie-card button:hover {
       background: #c0392b;
     }
+    /* Действующая карточка */
+.cookie-card {
+  background: #3E2723;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin: 1em 0;
+  padding: 1.2em;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* При появлении */
+.cookie-card.adding {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* При удалении */
+.cookie-card.removing {
+  opacity: 0;
+  transform: scale(0.95);
+}
 
     .input-group {
       display: flex;
@@ -466,16 +482,29 @@ console.table(cookies);</code></pre>
     }
 
     function listCookies() {
-      const output = document.getElementById('cookieList');
-      output.innerHTML = '';
-      const cookies = document.cookie.split(';').map(c => c.trim()).filter(Boolean);
-      cookies.forEach(cookie => {
-        const [name, value] = cookie.split('=');
-        const card = document.createElement('div');
-        card.className = 'cookie-card';
-        card.innerHTML = `<strong>${name}</strong><br>Value: ${value}<br><button onclick="deleteCookie('${name}')">Delete</button>`;
-        output.appendChild(card);
-      });
+     const output = document.getElementById('cookieList');
+  output.innerHTML = '';
+  const cookies = document.cookie.split(';').map(c => c.trim()).filter(Boolean);
+
+  cookies.forEach(cookie => {
+    const [name, value] = cookie.split('=');
+
+    const card = document.createElement('div');
+    card.className = 'cookie-card adding'; // временно добавляем класс для анимации
+
+    card.innerHTML = `
+      <strong>${name}</strong><br>
+      Value: ${value}<br>
+      <button onclick="deleteCookieWithAnimation(this, '${name}')">Delete</button>
+    `;
+
+    output.appendChild(card);
+
+    // Плавное появление
+    setTimeout(() => {
+      card.classList.remove('adding');
+    }, 10);
+  });
     }
 
     function addDemoCookies() {
@@ -495,10 +524,14 @@ console.table(cookies);</code></pre>
       listCookies();
     }
 
-    function deleteCookie(name) {
-      document.cookie = `${name}=; max-age=0`;
-      listCookies();
-    }
+   function deleteCookieWithAnimation(button, name) {
+  const card = button.closest('.cookie-card');
+  card.classList.add('removing'); // Добавим эффект исчезновения
+  setTimeout(() => {
+    document.cookie = `${name}=; max-age=0`; // Удалим cookie
+    listCookies(); // Перерисуем список
+  }, 300); // Ждём завершения анимации
+}
 
     siteData["amazon"] = [{'name': 'session-id', 'desc': 'Tracks shopping session', 'expires': '1 year'}, {'name': 'ubid-main', 'desc': 'Region identifier', 'expires': '6 months'}, {'name': 'session-token', 'desc': 'Login security', 'expires': '1 year'}];
 siteData["netflix"] = [{'name': 'NetflixId', 'desc': 'Authentication token', 'expires': '2 years'}, {'name': 'SecureNetflixId', 'desc': 'Secure login token', 'expires': '2 years'}, {'name': 'nfvdid', 'desc': 'Device ID for playback', 'expires': '1 year'}];
