@@ -13,12 +13,13 @@
       padding: 0;
       background-image: url('week11fon.jpg');
              height: 100vh;
-             margin: 0;">
+             margin: 0;
+      color: white;
     }
 
     nav {
       display: flex;
-      background: #4a90e2;
+      background: #3E2723;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
@@ -60,7 +61,7 @@
     }
 
     h2 {
-      color: #4a90e2;
+      color: white;
     }
 
     .cookie-card {
@@ -158,9 +159,9 @@
     <div id="cookieList"></div>
   </div>
 <div id="viewCookies" class="tab">
-  <h2>🔍 How to View Cookies in Your Browser</h2>
+  <h2> How to View Cookies in Your Browser</h2>
 
-  <h3>🔍 Method 1: Using Browser Console (JavaScript)</h3>
+  <h3> Method 1: Using Browser Console (JavaScript)</h3>
   <p><strong>✅ Steps:</strong></p>
   <ol>
     <li>Open the target website (e.g., <a href="https://google.com" target="_blank">https://google.com</a>)</li>
@@ -170,11 +171,11 @@
   </ol>
   <pre><code><strong>document.cookie</strong></code></pre>
 
-  <p>📋 <strong>What you’ll see:</strong></p>
+  <p> <strong>What you’ll see:</strong></p>
   <pre><code>NID=xyz123; SID=abc456; PREF=lang=en</code></pre>
   <p>This string contains all cookies accessible from JavaScript on the current site.</p>
 
-  <h3>📁 Method 2: Using the "Application" Tab</h3>
+  <h3> Method 2: Using the "Application" Tab</h3>
   <p><strong>✅ Steps:</strong></p>
   <ol>
     <li>Open DevTools (<code>F12</code>)</li>
@@ -211,14 +212,14 @@
     </tbody>
   </table>
 
-  <h3>🧠 Hidden or Secure Cookies</h3>
+  <h3> Hidden or Secure Cookies</h3>
   <ul>
     <li><strong>HttpOnly</strong> cookies cannot be seen in <code>document.cookie</code>, only in the <strong>Application</strong> tab</li>
     <li><strong>Third-party</strong> cookies may be blocked by your browser</li>
     <li><strong>Secure</strong> cookies are only available over HTTPS</li>
   </ul>
 
-  <h3>💡 Bonus: Parse Cookies in JavaScript</h3>
+  <h3>Bonus: Parse Cookies in JavaScript</h3>
   <p>You can convert the cookie string into a table like this:</p>
   <pre><code>const cookies = document.cookie.split("; ").map(c => {
   const [name, value] = c.split("=");
@@ -253,18 +254,18 @@ console.table(cookies);</code></pre>
 
   <h3>Why Are Cookies Useful?</h3>
   <ul>
-    <li>🔑 <strong>Login Convenience</strong>: Automatically log in without re-entering passwords.</li>
-    <li>🎯 <strong>Personalization</strong>: Show preferred language, theme, and relevant content.</li>
-    <li>🛒 <strong>Shopping</strong>: Keep items in your cart even if you leave the site.</li>
-    <li>📈 <strong>Analytics</strong>: Help site owners improve design and performance.</li>
-    <li>⚡ <strong>Faster Experience</strong>: Save settings locally to load pages quicker.</li>
+    <li><strong>Login Convenience</strong>: Automatically log in without re-entering passwords.</li>
+    <li> <strong>Personalization</strong>: Show preferred language, theme, and relevant content.</li>
+    <li> <strong>Shopping</strong>: Keep items in your cart even if you leave the site.</li>
+    <li> <strong>Analytics</strong>: Help site owners improve design and performance.</li>
+    <li> <strong>Faster Experience</strong>: Save settings locally to load pages quicker.</li>
   </ul>
 
   <h3>Potential Risks</h3>
   <ul>
-    <li>👁 <strong>Tracking</strong>: Third-party cookies may follow your activity across sites.</li>
-    <li>🔒 <strong>Security</strong>: If not properly secured, cookies can be stolen via attacks.</li>
-    <li>📦 <strong>Outdated Data</strong>: Cookies might store old information no longer valid.</li>
+    <li> <strong>Tracking</strong>: Third-party cookies may follow your activity across sites.</li>
+    <li> <strong>Security</strong>: If not properly secured, cookies can be stolen via attacks.</li>
+    <li> <strong>Outdated Data</strong>: Cookies might store old information no longer valid.</li>
   </ul>
 
   <h3>How to Delete or Manage Cookies</h3>
@@ -277,9 +278,9 @@ console.table(cookies);</code></pre>
 
   <h3>Tips for Privacy</h3>
   <ul>
-    <li>🕵️ Use incognito/private browsing mode.</li>
-    <li>🔌 Install extensions like uBlock Origin or Privacy Badger.</li>
-    <li>🧹 Regularly clear cookies and site data you don’t need.</li>
+    <li> Use incognito/private browsing mode.</li>
+    <li> Install extensions like uBlock Origin or Privacy Badger.</li>
+    <li> Regularly clear cookies and site data you don’t need.</li>
   </ul>
 </div>
 </div>
