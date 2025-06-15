@@ -147,6 +147,7 @@
     <button onclick="showTab('aboutCookies')">About Cookies</button>
     <button onclick="showTab('siteExamples')">Site Examples</button>
      <button onclick="showTab('viewCookies')"> View Cookies</button>
+    <button onclick="showTab('howCookies')"> How I Made</button>
   </nav>
 
   <div id="myCookies" class="tab active">
@@ -227,6 +228,128 @@
   return { name, value };
 });
 console.table(cookies);</code></pre>
+</div>
+  <div id="howCookies" class="tab">
+  <div id="documentation" class="tab-content" style="display: none; color: white; padding: 20px; max-width: 900px; margin: auto;">
+  <h2 style="color: #D7CCC8;">Documentation</h2>
+
+  <h3 style="color: #A1887F;">Product Requirements Document (PRD)</h3>
+
+  <h4 style="color: #A1887F;">Project Title</h4>
+  <p>Cookie Visualizer – Visualizing cookies stored in your browser</p>
+
+  <h4 style="color: #A1887F;">Project Goal</h4>
+  <p>
+    The goal of this project is to create a website that allows users to see what cookies are stored in their browser,
+    understand their properties (name, value, expiration, etc.), and learn how and why websites use them. The project
+    explains cookies in a visual and interactive way.
+  </p>
+
+  <h4 style="color: #A1887F;">Problem</h4>
+  <p>
+    Most internet users are unaware of browser cookies and the data they store. This can lead to confusion, privacy concerns,
+    or complete disregard. Existing explanations are often too technical. This project solves that by providing a simple,
+    clear visualization of cookies directly in the browser.
+  </p>
+
+  <h4 style="color: #A1887F;">Solution</h4>
+  <p>
+    I built a small site where users can:
+    <ul>
+      <li>View cookies currently stored by the browser (via JavaScript)</li>
+      <li>Understand how they work and when they expire</li>
+      <li>Learn about cookie types and privacy</li>
+      <li>See examples of cookies used by major websites</li>
+    </ul>
+  </p>
+
+  <h4 style="color: #A1887F;">Core Features</h4>
+  <ul>
+    <li><strong>My Cookies:</strong> View, add, and delete cookies via interactive cards</li>
+    <li><strong>About Cookies:</strong> Educational explanations and types of cookies</li>
+    <li><strong>Site Examples:</strong> Real examples from websites like Google, Amazon, Instagram</li>
+  </ul>
+
+  <h4 style="color: #A1887F;">Stretch Goals</h4>
+  <ul>
+    <li>Animations for adding/removing cookie cards</li>
+    <li>Dark mode</li>
+    <li>Cookie filtering by expiration date</li>
+    <li>Multilingual support (English & Russian)</li>
+    <li>Saving demo cookies via localStorage</li>
+  </ul>
+
+  <h4 style="color: #A1887F;">Technologies Used</h4>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>document.cookie API</li>
+    <li>GitHub Pages for hosting</li>
+    <li>Chrome DevTools for cookie analysis</li>
+  </ul>
+
+  <h3 style="color: #D7CCC8; margin-top: 40px;">How I Made This Project</h3>
+
+  <h4 style="color: #A1887F;">Goal and Approach</h4>
+  <p>
+    I wanted to explain cookies visually, using interactive elements. The entire project runs on vanilla HTML/CSS/JS
+    without frameworks, to get a deeper understanding of how cookies behave in browsers.
+  </p>
+
+  <h4 style="color: #A1887F;">Project Structure</h4>
+  <p>
+    The site is divided into three main sections:
+    <ul>
+      <li>My Cookies – for managing and viewing cookies</li>
+      <li>About Cookies – for educational content</li>
+      <li>Site Examples – for cookie examples from real websites</li>
+    </ul>
+  </p>
+
+  <h4 style="color: #A1887F;">Development Steps</h4>
+  <ol>
+    <li>Researched cookie properties and browser behavior</li>
+    <li>Built a form to create demo cookies</li>
+    <li>Wrote JavaScript to read and display cookies as cards</li>
+    <li>Created clear explanations for About Cookies section</li>
+    <li>Analyzed major websites using DevTools and added real cookie examples</li>
+  </ol>
+
+  <h4 style="color: #A1887F;">What I Learned</h4>
+  <ul>
+    <li>Cookies appear as one string, so I wrote a parser to split them</li>
+    <li>HttpOnly cookies are inaccessible via JavaScript for security</li>
+    <li>Cookies must be deleted by setting the same name/path and an expired date</li>
+    <li>Visualizing the data helped reinforce my understanding</li>
+  </ul>
+
+  <h4 style="color: #A1887F;">Challenges and Solutions</h4>
+  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+    <tr style="background-color: #5D4037; color: white;">
+      <th>Problem</th>
+      <th>Solution</th>
+    </tr>
+    <tr>
+      <td>Cookies didn't delete correctly</td>
+      <td>Used same name + expired date</td>
+    </tr>
+    <tr>
+      <td>HttpOnly cookies not visible</td>
+      <td>Learned they are protected by design</td>
+    </tr>
+    <tr>
+      <td>Cookie string too long</td>
+      <td>Parsed string into readable cards</td>
+    </tr>
+  </table>
+
+  <h4 style="color: #A1887F;">Reflection</h4>
+  <p>
+    This project helped me understand how cookies really work. I improved my skills in browser APIs, UI design, and breaking
+    down complex topics into simple explanations. It was both a technical and creative challenge that taught me a lot.
+  </p>
+</div>
+
+
 </div>
 
   <div id="aboutCookies" class="tab">
