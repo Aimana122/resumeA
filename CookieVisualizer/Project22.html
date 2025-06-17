@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Visualizer</title>
+  <style>
+    /* [Same styling as in previous full HTML] */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('week11fon.jpg');
+             height: 100vh;
+             margin: 0;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      background: #3E2723;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    nav button {
+      flex: 1;
+      padding: 1em;
+      background: transparent;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    nav button.active {
+      background: rgba(255, 255, 255, 0.25);
+      font-weight: bold;
+    }
+
+    .tab {
+      display: none;
+      padding: 2em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tab.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    h2 {
+      color: white;
+    }
+
+
+    .cookie-card button {
+      margin-top: 0.5em;
+      background: #e74c3c;
+      border: none;
+      color: white;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cookie-card button:hover {
+      background: #c0392b;
+    }
+    /* Действующая карточка */
+.cookie-card {
+  background: #3E2723;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin: 1em 0;
+  padding: 1.2em;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* При появлении */
+.cookie-card.adding {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* При удалении */
+.cookie-card.removing {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 1em;
+      flex-wrap: wrap;
+    }
+
+    .input-group input {
+      padding: 0.6em 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      font-size: 16px;
+      flex: 1;
+    }
+
+    .input-group input:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 5px rgba(74,144,226,0.3);
+      outline: none;
+    }
+
+    .button {
+      padding: 0.6em 1.2em;
+      background: #3E2723;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #5e3b35;
+    }
+
+    .site-button {
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      margin-top: 1em;
+    }
+
+    .site-cookie-list {
+      margin-left: 1em;
+      margin-top: 0.5em;
+      background: #3E2723;
+      border-left: 4px solid #1f1311;
+      padding: 1em;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <button onclick="showTab('myCookies')" class="active">My Cookies</button>
+    <button onclick="showTab('aboutCookies')">About Cookies</button>
+    <button onclick="showTab('siteExamples')">Site Examples</button>
+     <button onclick="showTab('viewCookies')"> View Cookies</button>
+    <button onclick="showTab('howCookies')"> How I Made</button>
+  </nav>
+
+  <div id="myCookies" class="tab active">
+     <div style="text-align: center; margin-top: 20px; margin-bottom: 40px;">
+  <img src="prev.gif" alt="Site preview" style="max-width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2);" />
+</div>
+    <h2>My Cookies</h2>
+    <button class="button" onclick="addDemoCookies()">Add Demo Cookies</button>
+    <div class="input-group">
+      <input id="cookieName" placeholder="Name">
+      <input id="cookieValue" placeholder="Value">
+      <button class="button" onclick="addCustomCookie()">Add Cookie</button>
+    </div>
+    <div id="cookieList"></div>
+  </div>
+<div id="viewCookies" class="tab">
+  <h2> How to View Cookies in Your Browser</h2>
+
+  <h3> Method 1: Using Browser Console (JavaScript)</h3>
+  <p><strong>✅ Steps:</strong></p>
+  <ol>
+    <li>Open the target website (e.g., <a href="https://google.com" target="_blank">https://google.com</a>)</li>
+    <li>Press <code>F12</code> or right-click → <strong>Inspect</strong></li>
+    <li>Go to the <strong>Console</strong> tab</li>
+    <li>Paste this code and press <strong>Enter</strong>:</li>
+  </ol>
+  <pre><code><strong>document.cookie</strong></code></pre>
+
+  <p> <strong>What you’ll see:</strong></p>
+  <pre><code>NID=xyz123; SID=abc456; PREF=lang=en</code></pre>
+  <p>This string contains all cookies accessible from JavaScript on the current site.</p>
+
+  <h3> Method 2: Using the "Application" Tab</h3>
+  <p><strong>✅ Steps:</strong></p>
+  <ol>
+    <li>Open DevTools (<code>F12</code>)</li>
+    <li>Go to the <strong>Application</strong> tab (in Firefox it's called <strong>Storage</strong>)</li>
+    <li>On the left, click <strong>Cookies</strong> and choose the site domain</li>
+    <li>You will see a table with details:</li>
+  </ol>
+
+  <table border="1" cellpadding="5" style="border-collapse: collapse; margin-top: 1em;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Expires</th>
+        <th>Secure</th>
+        <th>HttpOnly</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>session</td>
+        <td>abc123</td>
+        <td>2025-06-30</td>
+        <td>true</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>theme</td>
+        <td>dark</td>
+        <td>Session</td>
+        <td>false</td>
+        <td>false</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3> Hidden or Secure Cookies</h3>
+  <ul>
+    <li><strong>HttpOnly</strong> cookies cannot be seen in <code>document.cookie</code>, only in the <strong>Application</strong> tab</li>
+    <li><strong>Third-party</strong> cookies may be blocked by your browser</li>
+    <li><strong>Secure</strong> cookies are only available over HTTPS</li>
+  </ul>
+
+  <h3>Bonus: Parse Cookies in JavaScript</h3>
+  <p>You can convert the cookie string into a table like this:</p>
+  <pre><code>const cookies = document.cookie.split("; ").map(c => {
+  const [name, value] = c.split("=");
+  return { name, value };
+});
+console.table(cookies);</code></pre>
+</div>
+  <div id="howCookies" class="tab">
+  <h2>Documentation</h2>
+
+  <h3>Product Requirements Document (PRD)</h3>
+
+  <h4">Project Title</h4>
+  <p>Cookie Visualizer – Visualizing cookies stored in your browser</p>
+
+  <h4>Project Goal</h4>
+  <p>
+    The goal of this project is to create a website that allows users to see what cookies are stored in their browser,
+    understand their properties (name, value, expiration, etc.), and learn how and why websites use them. The project
+    explains cookies in a visual and interactive way.
+  </p>
+
+  <h4>Problem</h4>
+  <p>
+    Most internet users are unaware of browser cookies and the data they store. This can lead to confusion, privacy concerns,
+    or complete disregard. Existing explanations are often too technical. This project solves that by providing a simple,
+    clear visualization of cookies directly in the browser.
+  </p>
+
+  <h4>Solution</h4>
+  <p>
+    I built a small site where users can:
+    <ul>
+      <li>View cookies currently stored by the browser (via JavaScript)</li>
+      <li>Understand how they work and when they expire</li>
+      <li>Learn about cookie types and privacy</li>
+      <li>See examples of cookies used by major websites</li>
+    </ul>
+  </p>
+
+  <h4>Core Features</h4>
+  <ul>
+    <li><strong>My Cookies:</strong> View, add, and delete cookies via interactive cards</li>
+    <li><strong>About Cookies:</strong> Educational explanations and types of cookies</li>
+    <li><strong>Site Examples:</strong> Real examples from websites like Google, Amazon, Instagram</li>
+  </ul>
+
+  <h4>Stretch Goals</h4>
+  <ul>
+    <li>Animations for adding/removing cookie cards</li>
+    <li>Dark mode</li>
+    <li>Cookie filtering by expiration date</li>
+    <li>Multilingual support (English & Russian)</li>
+    <li>Saving demo cookies via localStorage</li>
+  </ul>
+
+  <h4>Technologies Used</h4>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>document.cookie API</li>
+    <li>GitHub Pages for hosting</li>
+    <li>Chrome DevTools for cookie analysis</li>
+  </ul>
+
+  <h3 style="margin-top: 40px;">How I Made This Project</h3>
+
+  <h4>Goal and Approach</h4>
+  <p>
+    I wanted to explain cookies visually, using interactive elements. The entire project runs on vanilla HTML/CSS/JS
+    without frameworks, to get a deeper understanding of how cookies behave in browsers.
+  </p>
+
+  <h4>Project Structure</h4>
+  <p>
+    The site is divided into three main sections:
+    <ul>
+      <li>My Cookies – for managing and viewing cookies</li>
+      <li>About Cookies – for educational content</li>
+      <li>Site Examples – for cookie examples from real websites</li>
+    </ul>
+  </p>
+
+  <h4>Development Steps</h4>
+  <ol>
+    <li>Researched cookie properties and browser behavior</li>
+    <li>Built a form to create demo cookies</li>
+    <li>Wrote JavaScript to read and display cookies as cards</li>
+    <li>Created clear explanations for About Cookies section</li>
+    <li>Analyzed major websites using DevTools and added real cookie examples</li>
+  </ol>
+
+  <h4>What I Learned</h4>
+  <ul>
+    <li>Cookies appear as one string, so I wrote a parser to split them</li>
+    <li>HttpOnly cookies are inaccessible via JavaScript for security</li>
+    <li>Cookies must be deleted by setting the same name/path and an expired date</li>
+    <li>Visualizing the data helped reinforce my understanding</li>
+  </ul>
+
+  <h4>Challenges and Solutions</h4>
+  <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+    <tr style="background-color: #5D4037; color: white;">
+      <th>Problem</th>
+      <th>Solution</th>
+    </tr>
+    <tr>
+      <td>Cookies didn't delete correctly</td>
+      <td>Used same name + expired date</td>
+    </tr>
+    <tr>
+      <td>HttpOnly cookies not visible</td>
+      <td>Learned they are protected by design</td>
+    </tr>
+    <tr>
+      <td>Cookie string too long</td>
+      <td>Parsed string into readable cards</td>
+    </tr>
+  </table>
+
+  <h4>Reflection</h4>
+  <p>
+    This project helped me understand how cookies really work. I improved my skills in browser APIs, UI design, and breaking
+    down complex topics into simple explanations. It was both a technical and creative challenge that taught me a lot.
+  </p>
+</div>
+
+  <div id="aboutCookies" class="tab">
+    <div>
+
+  <h2>All About Cookies 🍪</h2>
+
+  <h3>What Are Cookies?</h3>
+  <p>Cookies are small text files stored in your browser by websites to remember information about you. They help websites function smoothly and provide a better experience for users.</p>
+
+  <h3>How Do Cookies Work?</h3>
+  <ul>
+    <li>You visit a website.</li>
+    <li>The site sets a cookie with data (e.g., your preferences or session ID).</li>
+    <li>Next time you visit, the site reads this cookie and customizes your experience.</li>
+  </ul>
+
+  <h3>Types of Cookies</h3>
+  <ul>
+    <li><strong>Session Cookies</strong> – Temporary, deleted when the browser is closed.</li>
+    <li><strong>Persistent Cookies</strong> – Stored for longer periods (days/months).</li>
+    <li><strong>Secure Cookies</strong> – Transmitted only over secure HTTPS connections.</li>
+    <li><strong>HttpOnly Cookies</strong> – Inaccessible to JavaScript, server-only for security.</li>
+    <li><strong>Third-party Cookies</strong> – Set by other domains (e.g., ads or trackers).</li>
+  </ul>
+
+  <h3>Why Are Cookies Useful?</h3>
+  <ul>
+    <li><strong>Login Convenience</strong>: Automatically log in without re-entering passwords.</li>
+    <li> <strong>Personalization</strong>: Show preferred language, theme, and relevant content.</li>
+    <li> <strong>Shopping</strong>: Keep items in your cart even if you leave the site.</li>
+    <li> <strong>Analytics</strong>: Help site owners improve design and performance.</li>
+    <li> <strong>Faster Experience</strong>: Save settings locally to load pages quicker.</li>
+  </ul>
+
+  <h3>Potential Risks</h3>
+  <ul>
+    <li> <strong>Tracking</strong>: Third-party cookies may follow your activity across sites.</li>
+    <li> <strong>Security</strong>: If not properly secured, cookies can be stolen via attacks.</li>
+    <li> <strong>Outdated Data</strong>: Cookies might store old information no longer valid.</li>
+  </ul>
+
+  <h3>How to Delete or Manage Cookies</h3>
+  <p>You can manage or delete cookies through your browser settings:</p>
+  <ul>
+    <li><strong>Chrome</strong>: Settings → Privacy & Security → Cookies and other site data → See all cookies → Remove</li>
+    <li><strong>Firefox</strong>: Preferences → Privacy & Security → Cookies and Site Data → Manage Data</li>
+    <li><strong>Safari</strong>: Preferences → Privacy → Manage Website Data</li>
+  </ul>
+
+  <h3>Tips for Privacy</h3>
+  <ul>
+    <li> Use incognito/private browsing mode.</li>
+    <li> Install extensions like uBlock Origin or Privacy Badger.</li>
+    <li> Regularly clear cookies and site data you don’t need.</li>
+  </ul>
+</div>
+</div>
+
+  <div id="siteExamples" class="tab">
+    <h2>Site Examples</h2>
+    <p>Click a site to reveal typical cookies:</p>
+  </div>
+
+  <script>
+    const siteData = {
+      google: [
+        { name: "SID", desc: "User login and session ID", expires: "2 years" },
+        { name: "NID", desc: "Preferences and language", expires: "6 months" },
+        { name: "1P_JAR", desc: "Ad personalization", expires: "30 days" }
+      ],
+      youtube: [
+        { name: "VISITOR_INFO1_LIVE", desc: "Track views", expires: "6 months" },
+        { name: "YSC", desc: "Video session", expires: "Session" },
+        { name: "PREF", desc: "Playback preferences", expires: "8 months" }
+      ],
+      twitter: [
+        { name: "auth_token", desc: "Login token", expires: "Persistent" },
+        { name: "guest_id", desc: "User tracking", expires: "13 months" },
+        { name: "personalization_id", desc: "Ad preferences", expires: "2 years" }
+      ],
+      reddit: [
+        { name: "reddit_session", desc: "Login session", expires: "Session" },
+        { name: "loid", desc: "Anonymous ID", expires: "2 years" },
+        { name: "_options", desc: "Feature flags", expires: "1 year" }
+      ]
+    };
+
+    function renderSiteButtons() {
+      const container = document.getElementById('siteExamples');
+      Object.keys(siteData).forEach(site => {
+        const btn = document.createElement('div');
+        btn.className = 'site-button';
+        btn.textContent = site.charAt(0).toUpperCase() + site.slice(1) + ".com";
+        btn.onclick = () => toggleSiteCookies(site);
+        container.appendChild(btn);
+
+        const list = document.createElement('div');
+        list.id = site;
+        list.className = 'site-cookie-list';
+        list.innerHTML = "<ul>" + siteData[site].map(c => 
+          `<li><b>${c.name}</b>: ${c.desc} <br><i>Expires:</i> ${c.expires}</li>`).join('') + "</ul>";
+        container.appendChild(list);
+      });
+    }
+
+    function toggleSiteCookies(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function showTab(id) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+      if (id === 'myCookies') listCookies();
+    }
+
+    function listCookies() {
+     const output = document.getElementById('cookieList');
+  output.innerHTML = '';
+  const cookies = document.cookie.split(';').map(c => c.trim()).filter(Boolean);
+
+  cookies.forEach(cookie => {
+    const [name, value] = cookie.split('=');
+
+    const card = document.createElement('div');
+    card.className = 'cookie-card adding'; // временно добавляем класс для анимации
+
+    card.innerHTML = `
+      <strong>${name}</strong><br>
+      Value: ${value}<br>
+      <button onclick="deleteCookieWithAnimation(this, '${name}')">Delete</button>
+    `;
+
+    output.appendChild(card);
+
+    // Плавное появление
+    setTimeout(() => {
+      card.classList.remove('adding');
+    }, 10);
+  });
+    }
+
+    function addDemoCookies() {
+      document.cookie = "session_demo=xyz123";
+      document.cookie = "persistent_demo=rememberme; max-age=86400";
+      document.cookie = "thirdparty_demo=tracker; max-age=604800";
+      document.cookie = "secure_demo=securevalue; Secure";
+      document.cookie = "httponly_demo=hidden; HttpOnly";
+      listCookies();
+    }
+
+    function addCustomCookie() {
+      const name = document.getElementById('cookieName').value.trim();
+      const value = document.getElementById('cookieValue').value.trim();
+      if (!name) return alert("Enter a name.");
+      document.cookie = `${name}=${value}; max-age=86400`;
+      listCookies();
+    }
+
+   function deleteCookieWithAnimation(button, name) {
+  const card = button.closest('.cookie-card');
+  card.classList.add('removing'); // Добавим эффект исчезновения
+  setTimeout(() => {
+    document.cookie = `${name}=; max-age=0`; // Удалим cookie
+    listCookies(); // Перерисуем список
+  }, 300); // Ждём завершения анимации
+}
+
+    siteData["amazon"] = [{'name': 'session-id', 'desc': 'Tracks shopping session', 'expires': '1 year'}, {'name': 'ubid-main', 'desc': 'Region identifier', 'expires': '6 months'}, {'name': 'session-token', 'desc': 'Login security', 'expires': '1 year'}];
+siteData["netflix"] = [{'name': 'NetflixId', 'desc': 'Authentication token', 'expires': '2 years'}, {'name': 'SecureNetflixId', 'desc': 'Secure login token', 'expires': '2 years'}, {'name': 'nfvdid', 'desc': 'Device ID for playback', 'expires': '1 year'}];
+siteData["linkedin"] = [{'name': 'li_at', 'desc': 'Auth token', 'expires': '90 days'}, {'name': 'JSESSIONID', 'desc': 'Session identifier', 'expires': 'Session'}, {'name': 'lang', 'desc': 'Language preference', 'expires': 'Persistent'}];
+siteData["instagram"] = [{'name': 'csrftoken', 'desc': 'CSRF protection', 'expires': '1 year'}, {'name': 'ds_user_id', 'desc': 'User ID', 'expires': 'Persistent'}, {'name': 'sessionid', 'desc': 'Session authentication', 'expires': 'Session'}];
+siteData["tiktok"] = [{'name': 'tt_csrf_token', 'desc': 'CSRF security', 'expires': '1 year'}, {'name': 's_v_web_id', 'desc': 'Visitor ID', 'expires': '6 months'}, {'name': 'ttwid', 'desc': 'Login identity', 'expires': '1 year'}];
+window.onload = () => {
+      listCookies();
+      renderSiteButtons();
+    };
+  </script>
+
+</body>
+</html>
