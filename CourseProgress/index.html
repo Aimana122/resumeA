@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+ <title>Current Course Grade Calculator</title>
+ <style>
+ body {font-family: Arial; background: #f9f9f9; margin: 40px; color: #333;}
+ h1 {color: #2c7be5; text-align: center;}
+ iframe {width: 90%; height: 300px; display: block; margin: 20px auto; border: none;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
+ p {text-align: center;}
+ </style>
+</head>
+<body>
+<div id="grade-summary" style="
+  background: #f9f9f9;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  width: fit-content;
+  margin: 40px auto;
+  text-align: center;
+">
+  <h2 style="margin-top: 0;">Course Progress</h2>
+  <div id="grade-content">Loading...</div>
+</div>
+
+<script>
+  fetch('https://script.google.com/macros/s/AKfycby3AUhVyNkIyEKR08jefxEzkU5LnZuXu6MPmLl94FmbLX4bVifeVbzlzUVs35jlBwSB/exec')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('grade-content').innerHTML = `
+        <p><strong>Total Progress:</strong> ${data.received} out of ${data.max}</p>
+        <p><strong>Total Completion:</strong> ${data.percentTotal}%</p>
+
+        <hr style="margin: 20px auto; width: 60%;">
+
+        <p><strong>Current Progress:</strong> ${data.received} out of ${data.currentMax}</p>
+        <p><strong>Progress Based on Current Max:</strong> ${data.percentCurrent}%</p>
+
+        <p style="font-size: 0.9em; color: gray; margin-top: 12px;">As of ${data.date}</p>
+      `;
+    })
+    .catch(err => {
+      document.getElementById('grade-content').innerHTML = `<p style="color: red;">Error loading data</p>`;
+      console.error(err);
+    });
+</script>
+ <p>Real-time grade calculation powered by Google Apps Script and Sheets.</p>
+   <h1>Google Apps Script Notes</h1>
+  <p><em>(Week 7 Assignment)</em></p>
+
+  <h2>What is Google Apps Script?</h2>
+  <p>Google Apps Script (GAS) is a cloud-based scripting language developed by Google. It allows users to automate tasks, extend the functionality of Google Workspace apps (like Docs, Sheets, Forms, and Gmail), and create lightweight web applications. GAS is based on JavaScript, making it accessible to users with basic programming knowledge.</p>
+
+  <h2>Who uses Google Apps Script?</h2>
+  <ul>
+    <li>Office workers who want to automate repetitive tasks (e.g., sending emails, updating spreadsheets).</li>
+    <li>Developers creating internal business tools.</li>
+    <li>Educators managing classroom data and automating grading.</li>
+    <li>Students organizing academic work more efficiently.</li>
+    <li>Businesses integrating different Google Workspace products.</li>
+  </ul>
+
+  <h2>Where is Google Apps Script used?</h2>
+  <ul>
+    <li>Inside Google Docs, Sheets, Slides, Forms, and Gmail to automate workflows.</li>
+    <li>In standalone web applications built using the Apps Script web app deployment.</li>
+    <li>For building add-ons for Google Workspace products.</li>
+    <li>For connecting to external APIs and third-party services.</li>
+  </ul>
+
+  <h2>When should you use Google Apps Script?</h2>
+  <ul>
+    <li>When manual tasks like data entry or email communication need to be automated.</li>
+    <li>When lightweight, serverless web applications are required.</li>
+    <li>When custom solutions are needed inside Google Workspace without installing external software.</li>
+    <li>When teams need to collaborate in real-time using Google apps.</li>
+  </ul>
+
+  <h2>Why use Google Apps Script?</h2>
+  <ul>
+    <li>It is easy to learn for those familiar with JavaScript.</li>
+    <li>No need for server maintenance — it runs on Google’s cloud infrastructure.</li>
+    <li>Direct access to all Google Workspace products and APIs.</li>
+    <li>Free to use (within Google usage quotas).</li>
+    <li>Enables quick creation of functional applications and process automation.</li>
+  </ul>
+
+  <h2>Potential Creative Uses of Google Apps Script</h2>
+  <ul>
+    <li>Automated Email Notifications: Sending personalized emails based on a Sheet’s data.</li>
+    <li>Custom CRM System: Managing customer databases inside Google Sheets.</li>
+    <li>Auto Calendar Events: Automatically creating Calendar events from form responses.</li>
+    <li>Website Scraping: Collecting public information and storing it in a Sheet.</li>
+    <li>Workflow Automation: Moving data between Sheets, Forms, and Docs automatically.</li>
+    <li>Real-Time Dashboards: Updating Sheets and presenting live data using simple web apps.</li>
+  </ul>
+
+  <h2>AI Conversation Example</h2>
+  <p>During my research to understand Google Apps Script, I consulted an AI (ChatGPT) to clarify concepts like backend simulation, web app deployment, and live data fetching from Sheets.<br><a href="https://chat.openai.com/your_conversation_link">ChatGPT Conversation</a></p>
+  <h2>Pros and Cons of Google Apps Script</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pros</th>
+        <th>Cons</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Easy integration with Google services</td>
+        <td>Execution time limits (6 minutes for free accounts)</td>
+      </tr>
+      <tr>
+        <td>Free to use within Google Workspace limits</td>
+        <td>Limited memory and processing power</td>
+      </tr>
+      <tr>
+        <td>Based on simple JavaScript (easy to learn)</td>
+        <td>Permission and security management can be tricky</td>
+      </tr>
+      <tr>
+        <td>No need to manage servers (runs on Google's cloud)</td>
+        <td>Apps Script usage quotas can be restrictive</td>
+      </tr>
+      <tr>
+        <td>Quick deployment of lightweight web apps and automation</td>
+        <td>Debugging large or complex scripts can be challenging</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Conclusion</h2>
+  <p>Google Apps Script provides a powerful, accessible way to automate Google Workspace tasks and build lightweight applications without needing server infrastructure. Despite some limitations in execution time and quota restrictions, it remains an excellent tool for individuals and businesses looking to increase productivity and innovation.</p>
+</body>
+</html>
