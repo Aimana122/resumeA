@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+    <title>DataGrid Manager</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <h1>📊 Virtual Library</h1>
+            <div class="filters">
+                <a href="https://aimana122.github.io/resumeA/"><button class="filter-btn active">RESUME</button></a>
+				<a href="https://drive.google.com/drive/folders/1ByxxkAdS9WsQiSK-kzEKGuHagpZkBZyZ?usp=sharing"><button class="filter-btn active">REFERENCE</button></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+		<div class="data-grid1">		
+		<iframe 
+			src="https://docs.google.com/spreadsheets/d/1mcSX0lkUO39jAF5_1L_7pz5OVuNlfsXfirDmfDGKPJk/edit?usp=sharing"
+			width="100%" 
+			height="600" 
+			frameborder="0" 
+			style="border: 1px solid #ddd;"
+			></iframe>
+		</div>
+		<div class="data-grid1">		
+		<iframe 
+			src="https://docs.google.com/spreadsheets/d/1K4yD9tGYZuY10TmRtNvEYu5Th5i_8uimVLFFf17dmPc/edit?usp=sharing"
+			width="100%" 
+			height="600" 
+			frameborder="0" 
+			style="border: 1px solid #ddd;"
+			></iframe>
+		</div>
+		<div class="data-grid1">		
+		<iframe 
+			src="https://docs.google.com/spreadsheets/d/1OYOX15xrbSElDn-Dj4t3f_vn7YvIbcrUb7Rzv1m7Pvw/edit?usp=sharing"
+			width="100%" 
+			height="600" 
+			frameborder="0" 
+			style="border: 1px solid #ddd;"
+			></iframe>
+		</div>
+		<div class="data-grid1">		
+		 <img src="1.png" alt="">
+		</div>
+
+        <div class="data-grid">
+            <!-- Пример элемента данных -->
+            <div class="data-card">
+				 <strong>Objective</strong>
+                <p>
+				The objective of this project was to design and create a virtual library database system using a spreadsheet. This system was intended to help track information about books in a digital library, including details like book IDs, titles, authors, genres, availability, and checkout dates. The main goal was to understand the use of databases and how to structure data for effective management and retrieval.
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong>Key Skills Acquired</strong>
+                <p>
+				 <ul>
+				 <li><strong>Basic Spreadsheet Work:</strong> I learned how to use spreadsheets for organizing and managing data efficiently.</li>
+				 <li><strong>Data Structure and Design:</strong> I gained knowledge in how to structure data within tables, ensuring each piece of information is appropriately categorized and linked.</li>
+				 <li><strong>Database Management in Everyday Systems:</strong> I understood the importance of databases in real-world systems, especially for managing large volumes of data in an organized manner.</li>
+				 </ul>
+				</p>
+            </div>
+			<div class="data-card">
+				 <p><strong>Steps and Instructions Followed</strong><br>
+				 <strong>1. Created the Database Structure:</strong></p>
+                <p>I created a spreadsheet with the following columns to represent the necessary data about books:
+				 <ul>
+				 <li><strong>book_ID(Primary Key):</strong>  A unique identifier for each book in the library.</li>
+				 <li><strong>title:</strong> The name of the book.</li>
+				 <li><strong>author:</strong> The author of the book.</li>
+				 <li><strong>genre:</strong> The genre or category of the book.</li>
+				 <li><strong>publication_date:</strong> The publication year of the book (as a number).</li>
+				 <li><strong>available:</strong> A field indicating whether the book is available or checked out (boolean values: Yes/No).li>
+				 <li><strong>last_checkout_date:</strong> The date the book was last checked out (if applicable).</li>
+				 </ul>
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong>2. Validate Information:</strong>
+                <p>
+				 After creating the database structure, I populated the spreadsheet with data for 50 books, including relevant details such as book titles, authors, genres, and availability statuses. I then saved the data as a .CSV file and uploaded it to the virtual library platform.
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong>3. Identified Issues with the Database Structure:</strong>
+                <p>Upon reviewing the initial database structure, I identified a few potential issues:
+				 <ul>
+				 <li><strong>Lack of Detailed Author Information: </strong>  The author information was limited to the author’s name only. There was no space to include additional author details like nationality, biography, or birthdate.</li>
+				 <li><strong>No Separation of Genres: </strong> The genre field was a simple text field, but it could benefit from a separate table for genres, which would allow for better categorization and future scalability.</li>
+				 <li><strong>Missing User Information for Checkout History: </strong> The “last_checkout_date” column did not link back to a specific user, which is critical for tracking who checked out a book.</li>
+				 </ul>
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong>4. Restructure the Database:</strong>
+                <p>To improve the database structure, I made the following adjustments:
+				 <ul>
+				 <li><strong>Added an Author Table:</strong>  I created a separate table for authors to store additional information such as their birthdate and nationality.</li>
+				 <li><strong>Created a Genre Table: </strong> I created a new table for genres, allowing each book to reference a genre by its unique ID. This would prevent the duplication of genre data across multiple books and improve the overall organization.</li>
+				 <li><strong>Created a Checkout Table: </strong>  I introduced a checkout table to track which user borrowed a book and when it was checked out. This would allow for better tracking and reporting on library usage.</li>
+				 </ul>
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong> 5. Consideration of Primary Keys:</strong>
+                <p>In addition to the <strong>book_ID</strong> as the primary key for the book table, I used:
+				 <ul>
+				 <li><strong>author_ID</strong> as the primary key for the author table.</li>
+				 <li><strong>genre_ID</strong> as the primary key for the genre table.</li>
+				 <li><strong>checkout_ID</strong> as the primary key for the checkout table.</li>
+				 </ul>
+				 Each table now had a unique identifier, which ensured the integrity of data and relationships between tables.
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong>Questions and Queries</strong>
+                <p>To provide answers to the questions from the instructions, I created a set of database queries (spreadsheet formulas) to extract the following data:
+				 <ul>
+				 <li><strong>1. Find the books that are currently available.</strong>Formula used: =FILTER(BookTable[Title], BookTable[Available] = "Yes")</li>
+				 <li><strong>2. Identify the most checked-out books.</strong> Formula used: =SORT(BookTable[Title], CheckoutTable[Book_ID], TRUE)</li>
+				 <li><strong>3. List authors with the most checked-out books.</strong>Formula used: =SORT(AuthorTable[Author], COUNTIF(CheckoutTable[Author_ID], AuthorTable[Author_ID]), TRUE)</li>
+				 <li><strong>4. Find books that have not been checked out in the past month.</strong> Formula used: =FILTER(BookTable[Title], BookTable[Last_Checkout_Date] < TODAY() - 30)</li>
+				 </ul>
+				 Each table now had a unique identifier, which ensured the integrity of data and relationships between tables.
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong> Conclusion</strong>
+                <p>This project allowed me to deepen my understanding of database design and management, particularly in the context of real-world systems such as a virtual library. By structuring the data into multiple related tables, I ensured that the library system could be scalable, maintainable, and easy to update. The key skills I gained—such as designing relational databases, implementing primary keys, and creating analytical queries—are valuable for future projects involving complex data systems.
+				</p>
+            </div>
+			<div class="data-card">
+				 <strong> Key Takeaways:</strong>
+                <p>In addition to the <strong>book_ID</strong> as the primary key for the book table, I used:
+				 <ul>
+				 <li><strong>Organizing Data Efficiently: </strong> The importance of structuring data in relational tables for clarity and ease of access.</li>
+				 <li><strong>Data Integrity: </strong> Ensuring that each table is linked correctly using unique identifiers (primary keys) helps maintain data consistency and integrity.</li>
+				 <li><strong>Database Queries: </strong> Using spreadsheet formulas to extract and analyze data is a valuable skill for making informed decisions and reports.</li>
+				 </ul>
+				 This project has given me a practical experience in creating a fully functioning database system, with a focus on real-world applications and problem-solving.
+				</p>
+            </div>
+
+            <!-- Добавьте больше data-card элементов -->
+        </div>
+    </main>
+</body>
+</html>

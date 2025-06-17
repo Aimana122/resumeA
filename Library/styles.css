@@ -1,0 +1,111 @@
+:root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-image:url('fon1.jfif');
+			background-size: cover; /* Заполняет всю область без растяжения (обрезает края) */
+		background-position: center; /* Центрирует изображение */
+		background-repeat: no-repeat;
+		filter: brightness(85%);
+			
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Шапка */
+        .header {
+            background:#41523b;
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Панель управления */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .search-box {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        /* Сетка данных */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+		.data-grid1 {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+		img {
+			max-width: 100%;
+        }
+
+        .data-card {
+            background: #bdbdbd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .data-field {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        /* Фильтры */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background: #203a27;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #203a27;
+            color: white;
+        }
