@@ -1,0 +1,120 @@
+  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+			padding-top: 10px
+        }
+		a{
+			color:#00ff00;
+		}
+
+        body {
+            background-image: url('1.jpg');
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+		font-size: 18px;
+        }
+		.image-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Выравнивание по горизонтали */
+  gap: 30px; /* Расстояние между картинками */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.custom-image {
+  width: 80%; /* Базовая ширина для всех изображений */
+  height: auto; /* Сохраняет пропорции */
+  object-fit: contain; /* Позволяет регулировать размер без искажений */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+/* Индивидуальные настройки для каждого изображения */
+.custom-image:nth-child(1) {
+  width: 100%;
+  max-height: 100%;
+}
+
+.custom-image:nth-child(2) {
+  width: 90%;
+  max-height: 400px;
+}
+
+.custom-image:nth-child(3) {
+  width: 70%;
+  max-height: 350px;
+}
+
+/* Регулировка при наведении */
+.custom-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .custom-image {
+    width: 95% !important;
+    max-height: none !important;
+  }
+}
+
+        .crt {
+            background: #000;
+            width: 1000px;
+            height: 600px;
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 30px #00ff0040;
+            padding: 20px;
+            color: #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal {
+            border: 2px solid #00ff00;
+            padding: 15px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .prompt {
+            color: #00ff00;
+            margin: 10px 0;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .status-bar {
+            border-top: 2px solid #00ff00;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+
+        button {
+            background: #002200;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 5px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: #000;
+        }
