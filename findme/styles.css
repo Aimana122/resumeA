@@ -1,0 +1,111 @@
+h{
+	font-style:bold;
+}
+a{
+	 all: unset;
+	 cursor: pointer;
+	 color:orange;
+}
+.btn{
+	background-color: black;
+	border-color: black;
+}
+.btn:hover{
+	background-color: orange;
+	border-color: orange;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.carousel {
+    margin-bottom: 30px;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.container {
+    padding: 20px;
+}
+.article-text{
+	background: white;
+    padding: 20px; /* Отступы от краев */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Тень для контраста */
+    display: inline-block; /* Фон только под текстом */
+}
+.col-12{
+	background: white;
+    padding: 20px; /* Отступы от краев */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Тень для контраста */
+    display: inline-block; /* Фон только под текстом */
+}
+.mb-4{
+	background: white;
+    padding: 20px; /* Отступы от краев */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Тень для контраста */
+    display: inline-block; /* Фон только под текстом */
+}
+.image-container1 {
+            position: relative;
+            padding-top: 100%; /* Соотношение 1:1 (квадрат) */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+		.image-container2 {
+            position: relative;
+            padding-top: 150%; /* Соотношение 1:1 (квадрат) */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+		.image-container3 {
+            position: relative;
+            padding-top: 150%; /* Соотношение 1:1 (квадрат) */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Само изображение */
+        .article-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Кадрирование без искажений */
+        }
+
+        /* Сетка для двух столбиков */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
